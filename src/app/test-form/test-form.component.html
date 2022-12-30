@@ -3,7 +3,7 @@
       <h2 class="center">Form submit</h2>
       <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
         <form [formGroup]="submitForm" (ngSubmit)="onSubmit()">
-         
+
             <div class="form-group">
               <label for="username">Username</label>
               <input
@@ -11,7 +11,7 @@
                 id="username"
                 formControlName="username"
                 class="form-control">
-                <span *ngIf="!submitForm.get('username')?.valid  && submitForm.get('username')?.touched"   class="help-block">Please enter username</span>
+                <span *ngIf="!submitForm.get('username')?.valid  && (submitForm.get('username')?.dirty || submitForm.get('username')?.touched) "   class="help-block">Please enter username</span>
             </div>
             <div class="form-group">
               <label for="email">email</label>
@@ -20,9 +20,9 @@
                 id="email"
                 formControlName="email"
                 class="form-control">
-                <span *ngIf="!submitForm.get('email')?.valid && submitForm.get('email')?.touched" class="help-block">Please enter valid email</span>
+                <span *ngIf="!submitForm.get('email')?.valid && (submitForm.get('email')?.dirty || submitForm.get('email')?.touched) " class="help-block">Please enter valid email</span>
             </div>
-          
+
           <div class="radio" *ngFor="let gender of genders">
             <label>
               <input
@@ -31,10 +31,9 @@
                 [value]="gender">{{ gender }}
             </label>
           </div>
-          <span *ngIf="!submitForm?.valid" class="help-block">Please enter valid data!</span>
-          <button class="btn btn-primary" type="submit">Submit</button>
+          <span *ngIf="!submitForm?.valid && submitForm?.touched " class="help-block">Please enter valid data!</span>
+          <button class="btn btn-primary"   type="submit">Submit</button>
         </form>
       </div>
     </div>
   </div>
-  
